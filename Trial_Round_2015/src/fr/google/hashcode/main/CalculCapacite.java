@@ -2,7 +2,6 @@ package fr.google.hashcode.main;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
 
 
 public class CalculCapacite {
@@ -30,8 +29,7 @@ public class CalculCapacite {
 		
 		
 		for(int i = 0 ; i < serveurs.length ; i++){
-			
-			
+
 			capaciteGroupes.set(serveurs[i].getGroupe(), capaciteGroupes.get(serveurs[i].getGroupe()) + serveurs[i].getCapacite());
 		}
 		
@@ -53,12 +51,7 @@ public class CalculCapacite {
 	
 	
 	}
-	
-	
-	
-	
 
-	
 	public int calculCapacites(Datacenter dc){
 		Serveur[] serveurs = dc.getServeurs();
 		
@@ -104,5 +97,7 @@ public class CalculCapacite {
 		
 		return calculCapaciteTotale(dc) / nombreServeursActifs;
 	}
+	
+	
 	
 }
