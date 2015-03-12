@@ -17,18 +17,27 @@ public class Main {
 		
 		try {
 			//Ligne1
-			String line1 = reader.readLine();
-			String[] test = line1.split(" ");
+			String line = reader.readLine();
+			String[] test = line.split(" ");
 			datacenter dc = new datacenter(Integer.parseInt(test[0]),Integer.parseInt(test[1]),Integer.parseInt(test[2]),
 					Integer.parseInt(test[3]),Integer.parseInt(test[4]));
 			
-			Parcours des emplacement indispo
+			//Parcours des emplacement indispo
 			for (int i = 0 ; i <dc.getNbEmplcementI();i++){
-				
-				
+				line=reader.readLine();
+				String[] point = line.split(" ");
+				dc.getEmplacementIndispo()[i]=new Point(Integer.parseInt(point[0]),Integer.parseInt(point[1]));
 			}
-			//parcours des lines
-			while ((line1=reader.readLine()) != null){
+			
+			//parcours des serveurs
+			for (int i = 0 ; i<dc.getNbServer();i++){
+				line=reader.readLine();
+				String[] serveur = line.split(" ");
+				dc.getServeurs()[i]=new Serveur(Integer.parseInt(serveur[0]),Integer.parseInt(serveur[1]));
+			}
+				
+			System.out.println("end");
+			/*while ((line=reader.readLine()) != null){
 				
 			}
 			char car;

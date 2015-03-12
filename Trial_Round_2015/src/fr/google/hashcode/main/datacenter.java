@@ -10,6 +10,8 @@ public class datacenter {
 		this.nbEmplcementI = nbEmplcementI;
 		this.nbGroupe = nbGroupe;
 		this.nbServer = nbServer;
+		this.emplacementIndispo=new Point[nbEmplcementI];
+		this.serveurs = new Serveur[nbServer];
 	}
 
 	private final int nbRange;
@@ -18,7 +20,8 @@ public class datacenter {
 	private final int nbGroupe;
 	private final int nbServer;
 	
-	private final 
+	private final Point[] emplacementIndispo;
+	private final Serveur[] serveurs;
 	
 	
 	/**
@@ -54,6 +57,20 @@ public class datacenter {
 	 */
 	public int getNbEmplacementD() {
 		return nbEmplacementD;
+	}
+
+	/**
+	 * @return the emplacementIndispo
+	 */
+	public Point[] getEmplacementIndispo() {
+		return emplacementIndispo;
+	}
+
+	/**
+	 * @return the serveurs
+	 */
+	public Serveur[] getServeurs() {
+		return serveurs;
 	}
 
 }
