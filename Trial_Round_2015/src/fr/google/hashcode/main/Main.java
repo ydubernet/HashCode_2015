@@ -53,6 +53,8 @@ public class Main {
 			
 			System.out.println("end");
 			
+			System.out.println(CalculCapacite.calculCapaciteMoyenne(dc));
+			
 			/*while ((line=reader.readLine()) != null){
 				
 			}

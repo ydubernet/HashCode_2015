@@ -26,17 +26,14 @@ public class CalculCapacite {
 	public int calculCapaciteGroupes(Datacenter dc){
 		Serveur[] serveurs = dc.getServeurs();
 		
-		
-		
-		
 		List<Integer> capaciteGroupes = new ArrayList<Integer>();
 		
 		
 		for(int i = 0 ; i < serveurs.length ; i++){
+			
+			
 			capaciteGroupes.set(serveurs[i].getGroupe(), capaciteGroupes.get(serveurs[i].getGroupe()) + serveurs[i].getCapacite());
 		}
-		
-	
 		
 		
 		// On récupère les capacités selon les groupes et les rangées.
@@ -85,5 +82,27 @@ public class CalculCapacite {
 		
 	}
 	
+	public static int calculCapaciteTotale(Datacenter dc){
+		Serveur[] serveurs = dc.getServeurs();
+		
+		int capaciteTotale = 0;
+		for(int i = 0 ; i<serveurs.length;i++){
+			capaciteTotale += serveurs[i].getCapacite();
+		}
+		return capaciteTotale;
+	}
+	
+	public static double calculCapaciteMoyenne(Datacenter dc){
+		int nombreServeursActifs = 0;
+		Serveur[] serveurs = dc.getServeurs();
+		
+		for(int i = 0 ; i<serveurs.length ; i++){
+			if(serveurs[i].isPlace()){
+				nombreServeursActifs++;
+			}
+		}
+		
+		return calculCapaciteTotale(dc) / nombreServeursActifs;
+	}
 	
 }
