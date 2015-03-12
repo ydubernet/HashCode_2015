@@ -11,7 +11,9 @@ public class Compute {
 	
 	public void populateRanges() {
 		Point[] indispo = dc.getEmplacementIndispo();
-		Range[] ranges = null;
+		Range[] ranges = new Range[dc.getNbEmplacementD()];
+		
+		Emplacement[] emplacements = new Emplacement[dc.getNbEmplacementD()];
 		
 		for(int j = 0 ; j<dc.getNbRange();j++)
 		{
@@ -23,7 +25,7 @@ public class Compute {
 			{
 				if(indispo[i].x == j)
 				{
-					ranges[j].emplacements[i] = indispo[i];
+					ranges[j].emplacements[i] = new Emplacement(indispo[i],Emplacement.State.INDISPO);
 				}
 			}
 		}
