@@ -25,9 +25,10 @@ public class Range {
 	{
 		int cpt = 0;
 		
-		for(int i = 0;i<taille;i++)
+		/*for(int i = 0;i<taille;i++)
 		{
-			if(emplacements[i])
-		}
+			
+		}*/
+		return 0;
 	}
 }
