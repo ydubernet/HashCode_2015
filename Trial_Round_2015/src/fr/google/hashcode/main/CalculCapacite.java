@@ -9,8 +9,38 @@ public class CalculCapacite {
 	public static int calculCapaciteMin(Datacenter dc){
 		Serveur[] serveurs = dc.getServeurs();
 		
-		int groupes[] = new int[serveurs.length];
+		int groupes[] = new int[dc.getNbGroupe()];
 		int rangees[] = new int[dc.getNbRange()];
+		int bestGroupeRange[] = new int[dc.getNbRange()];
+
+		for(int i = 0 ; i < bestGroupeRange.length; i ++){
+			bestGroupeRange[i] = 0;
+		}
+		
+		for(int k = 0;k<dc.getNbRange();k++)
+		{
+			int tmpGroupes[] = new int[dc.getNbGroupe()];
+			
+			for(int i = 0 ; i < tmpGroupes.length; i ++){
+				tmpGroupes[i] = 0;
+			}
+			
+			for(int i = 0 ; i < serveurs.length ; i++){	
+				if(serveurs[i].isPlace() && serveurs[i].getRange() == k){
+					tmpGroupes[serveurs[i].getGroupe()] += serveurs[i].getCapacite(); //sommes de chaque groupe
+				}
+			}
+			
+			int max=0;
+			for(int h = 0;h<tmpGroupes.length;h++)
+			{
+				if(tmpGroupes[h] > max)
+					max = tmpGroupes[h];
+			}
+			
+			bestGroupeRange[k] = max;
+		}
+		
 		for(int i = 0 ; i < groupes.length; i ++){
 			groupes[i] = 0;
 			
@@ -42,8 +72,8 @@ public class CalculCapacite {
 	
 	
 	
-	// Sommer pour chaque groupe tous les éléments de 
-	// chaque rangée correspondant au groupe considéré
+	// Sommer pour chaque groupe tous les ï¿½lï¿½ments de 
+	// chaque rangï¿½e correspondant au groupe considï¿½rï¿½
 //	public int calculCapaciteGroupes(Datacenter dc){
 //		Serveur[] serveurs = dc.getServeurs();
 //		
@@ -56,7 +86,7 @@ public class CalculCapacite {
 //		}
 //		
 //		
-//		// On récupère les capacités selon les groupes et les rangées.
+//		// On rï¿½cupï¿½re les capacitï¿½s selon les groupes et les rangï¿½es.
 //		for(int i = 0 ; i < serveurs.length ; i++){
 //			Serveur s = serveurs[i];
 //			
@@ -77,7 +107,7 @@ public class CalculCapacite {
 //	public int calculCapacites(Datacenter dc){
 //		Serveur[] serveurs = dc.getServeurs();
 //		
-//		// On récupère les capacités selon les groupes et les rangées.
+//		// On rï¿½cupï¿½re les capacitï¿½s selon les groupes et les rangï¿½es.
 //		for(int i = 0 ; i < serveurs.length ; i++){
 //			Serveur s = serveurs[i];
 //			
@@ -93,7 +123,7 @@ public class CalculCapacite {
 //		return 0;
 //		
 //		
-//		// A la fin, sortir une capacité garantie minimale de tous les  groupes.
+//		// A la fin, sortir une capacitï¿½ garantie minimale de tous les  groupes.
 //		
 //	}
 //	
