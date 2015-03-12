@@ -76,36 +76,12 @@ public class CalculCapacite {
 			
 			groupes.add(groupe, capaciteServeur);
 			rangees.add(rangee, capaciteServeur);
-			
+		
 		}
-		
-		
-		// Sommer pour le groupe 1 tous les éléments de chaque rangée correspondant au groupe 1
-		// De même pour chaque groupe
-
-		List<Integer> valeurs = new ArrayList<Integer>();
-		
-		for(Integer g : groupes){
-			int val = 0;
-				
-			val += rangees.get(g);
-
-			valeurs.add(g, val);
-		}
-		
-		// Ensuite, calculer la capacité du 1er groupe sur toutes les rangées sans la rangée où le groupe a calculé le maximum de capacité
-		// Store it
-		// De même pour chaque groupe
-		
-		for(Integer r : rangees){
-			
-		}
+		return 0;
 		
 		
 		// A la fin, sortir une capacité garantie minimale de tous les  groupes.
-		
-
-		
 		
 	}
 	

@@ -36,8 +36,9 @@ public class Main {
 				line=reader.readLine();
 				String[] serveur = line.split(" ");
 				dc.getServeurs()[i]=new Serveur(Integer.parseInt(serveur[0]),Integer.parseInt(serveur[1]));
-			}
-		
+			}			
+			
+			ComputeFl.Compute(dc);
 			
 			//Boucle ecrire serveur
 			for (int i = 0 ; i<dc.getNbServer();i++){
@@ -50,12 +51,7 @@ public class Main {
 				fos.write(lin.getBytes());
 			}
 			
-			
 			System.out.println("end");
-			
-			int capaciteMinimale = CalculCapacite.calculCapaciteMin(dc);
-			
-			ComputeFl.Compute(dc);
 			
 			/*while ((line=reader.readLine()) != null){
 				
