@@ -15,9 +15,8 @@ public final class ComputeFl {
 				for (int col=rangeFirstIndex[i]; col<dc.getNbEmplacementD();col++){
 					if (isPossible(i,col,dc,srv)){
 						srv.range(i, col, groupe);
-						groupe = groupe>=dc.getNbGroupe()?0:groupe+1;
-						if (groupe>46)
-						rangeFirstIndex[i]=col+1;
+						groupe = groupe>=dc.getNbGroupe()-1?0:groupe+1;
+						rangeFirstIndex[i]=col+1+srv.getTaille();
 						next = true;
 						
 						break;
