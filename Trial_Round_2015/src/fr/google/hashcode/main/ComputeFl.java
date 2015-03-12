@@ -3,52 +3,55 @@ package fr.google.hashcode.main;
 public final class ComputeFl {
 
 	public static void Compute(Datacenter dc){
-		int totalemplacement = dc.getNbGroupe()*dc.getNbEmplacementD()-dc.getNbEmplcementI();
+		int totalemplacement = dc.getNbRange()*dc.getNbEmplacementD()-dc.getNbEmplcementI();
 		int currentUsed = 0;
+		int capaciteTotal = 0;
 		boolean next = true;
 		do{
 			Serveur srv = maxServeurAplace(dc.getServeurs());
-			srv.setPlace(p);
-		} while (next==true)
-		for (int i=0;i<dc.getNbServer();i++){
-			
-		}
+			if (srv==null||currentUsed+srv.getTaille()>totalemplacement)
+				break;
+			srv.setPlace(true);
+			currentUsed+=srv.getTaille();
+			capaciteTotal+=srv.getCapacite();
+		} while (next==true);
+		
 		
 		int[] rangeFirstIndex = new int[dc.getNbRange()];
-		boolean next;
+
 		int groupe = 0;
-		//boolean test = false;
+		boolean test = false;
 		int maxTaille = getMaxTaille(dc.getServeurs());
 		
 		do{
 			next = false;
-			//test = !test;
-			for (int taille = maxTaille; taille>0;taille--){
-				//if (test){
-					for (int j = 0 ; j<dc.getNbRange();j++){
-						Serveur srv = maxServeurAplace(dc.getServeurs(),taille);
-						for (int col=rangeFirstIndex[j]; col<dc.getNbEmplacementD();col++){
-							if (isPossible(j,col,dc,srv)){
-								srv.range(j, col, groupe);
-								groupe = groupe>=dc.getNbGroupe()-1?0:groupe+1;
-								rangeFirstIndex[j]=col+1+srv.getTaille();
-								next = true;
-								
-								break;
-								
-							}
-						}
+			test = !test;
+			//for (int taille = maxTaille; taille>0;taille--){
+				if (test){
+			for (int j = 0 ; j<dc.getNbRange();j++){
+				Serveur srv = maxServeurAplaceAfter(dc.getServeurs()/*,taille*/);
+				for (int col=rangeFirstIndex[j]; col<dc.getNbEmplacementD();col++){
+					if (isPossible(j,col,dc,srv)){
+						srv.range(j, col, groupe);
+						groupe = groupe>=dc.getNbGroupe()-1?0:groupe+1;
+						rangeFirstIndex[j]+=1+srv.getTaille();
+						next = true;
+						
+						break;
+						
 					}
+				}
+			}
 					
-				/*}
+				}
 				else {
 					for (int j = 15 ; j>=0;j--){
-						Serveur srv = maxServeurAplace(dc.getServeurs(),taille);
+						Serveur srv = maxServeurAplace(dc.getServeurs()/*,taille*/);
 						for (int col=rangeFirstIndex[j]; col<dc.getNbEmplacementD();col++){
 							if (isPossible(j,col,dc,srv)){
 								srv.range(j, col, groupe);
 								groupe = groupe>=dc.getNbGroupe()-1?0:groupe+1;
-								rangeFirstIndex[j]=col+1+srv.getTaille();
+								rangeFirstIndex[j]=rangeFirstIndex[j]+1+srv.getTaille();
 								next = true;
 								break;
 								
@@ -56,8 +59,8 @@ public final class ComputeFl {
 						}
 					}
 					
-				}*/
-			}
+				}
+			//}
 			
 		} while (next==true);
 		
@@ -94,11 +97,11 @@ public final class ComputeFl {
 		return true;
 	}
 	
-	private static Serveur maxServeurAplace(Serveur[] srv, int taille){
+	private static Serveur maxServeurAplaceAfter(Serveur[] srv/*, int taille*/){
 		Serveur result = srv[0];
 		for (int i = 1 ; i<srv.length;i++){
 			Serveur serveur= srv[i];
-			if (serveur.isPlace()||serveur.getTaille()!=taille)
+			if (!serveur.isPlace()/*||serveur.getTaille()!=taille*/)
 				continue;
 			if (serveur.getCapacite()>result.getCapacite()||(serveur.getCapacite()==result.getCapacite()&&serveur.getTaille()<result.getTaille()))
 				result=serveur;
@@ -120,7 +123,17 @@ public final class ComputeFl {
 	
 	
 	private static Serveur maxServeurAplace(Serveur[] srv){
-		Serveur result = srv[0];
+		Serveur result = null;
+		int deb = 0;
+		while (deb<srv.length){
+			if (!srv[deb].isPlace()){
+				result = srv[deb];
+				break;
+			}
+			deb++;
+		}
+		if (result==null)
+			return null;
 		for (int i = 1 ; i<srv.length;i++){
 			Serveur serveur= srv[i];
 			if (serveur.isPlace())
