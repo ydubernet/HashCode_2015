@@ -9,6 +9,7 @@ public final class ComputeFl {
 			for (int emp=0;emp<dc.getNbEmplacementD();emp++){
 				if (isIndispo(rang,emp,dc.getEmplacementIndispo()))
 					continue;
+				if ()
 			}
 			
 			
