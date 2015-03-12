@@ -3,17 +3,19 @@ package fr.google.hashcode.main;
 import java.io.BufferedReader;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 
 public class Main {
 	private static final String readFileName = "dc.in";
-	private static final String writeFileName = "output.txt";
+	private static final String writeFileName = "dc.out";
 	private static final String endLine = "\n";
-	private Integer S = 0;
 
 	public static void main(String[] args) throws FileNotFoundException {
 		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(readFileName)));
+		FileOutputStream fos = new FileOutputStream(writeFileName);
 		
 		try {
 			//Ligne1
@@ -35,8 +37,18 @@ public class Main {
 				String[] serveur = line.split(" ");
 				dc.getServeurs()[i]=new Serveur(Integer.parseInt(serveur[0]),Integer.parseInt(serveur[1]));
 			}
-				
+		
+			
+			//Boucle ecrire serveur
+			for (int i = 0 ; i<dc.getNbServer();i++){
+				Serveur server = dc.getServeurs()[i];
+				String lin = server.getRange()+" "+server.getEmplacement()+" "+server.getGroupe()+(i<dc.getNbServer()-1?endLine:"");
+				fos.write(lin.getBytes());
+			}
+			
+			
 			System.out.println("end");
+			
 			/*while ((line=reader.readLine()) != null){
 				
 			}
@@ -65,6 +77,18 @@ public class Main {
 			fos.write(endLine.getBytes());*/
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+		finally{
+			try {
+				fos.close();
+			} catch (IOException e1) {
+				e1.printStackTrace();
+			}
+			try {
+				reader.close();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	
 		
