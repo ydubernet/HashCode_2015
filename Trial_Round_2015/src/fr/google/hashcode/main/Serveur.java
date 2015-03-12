@@ -4,7 +4,7 @@ public class Serveur {
 	private final int taille;
 	private final int capacite;
 	
-	private boolean place;
+	private boolean place = false;
 	
 	private int range;
 	private int emplacement;
@@ -37,12 +37,6 @@ public class Serveur {
 		return place;
 	}
 
-	/**
-	 * @param place the place to set
-	 */
-	public void setPlace(boolean place) {
-		this.place = place;
-	}
 
 	/**
 	 * @return the groupe
@@ -51,12 +45,6 @@ public class Serveur {
 		return groupe;
 	}
 
-	/**
-	 * @param groupe the groupe to set
-	 */
-	public void setGroupe(int groupe) {
-		this.groupe = groupe;
-	}
 
 	/**
 	 * @return the emplacement
@@ -65,12 +53,6 @@ public class Serveur {
 		return emplacement;
 	}
 
-	/**
-	 * @param emplacement the emplacement to set
-	 */
-	public void setEmplacement(int emplacement) {
-		this.emplacement = emplacement;
-	}
 
 	/**
 	 * @return the range
@@ -78,13 +60,14 @@ public class Serveur {
 	public int getRange() {
 		return range;
 	}
-
-	/**
-	 * @param range the range to set
-	 */
-	public void setRange(int range) {
-		this.range = range;
+	
+	public void range(int range, int emplacement, int groupe){
+		this.range=range;
+		this.emplacement=emplacement;
+		this.groupe=groupe;
+		place=true;
 	}
+
 
 
 }
