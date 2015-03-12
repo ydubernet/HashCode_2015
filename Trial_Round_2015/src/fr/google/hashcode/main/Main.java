@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 import fr.google.hashcode.buffer.SerializedData;
 
 public class Main {
-	private static final String readFileName = "doodle.txt";
+	private static final String readFileName = "dc.in";
 	private static final String writeFileName = "output.txt";
 	private static final String endLine = "\n";
 	private Integer S = 0;
@@ -18,9 +18,14 @@ public class Main {
 	public static void main(String[] args) throws FileNotFoundException {
 		
 		BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(readFileName)));
+		
 		try {
 			//Ligne1
 			String line1 = reader.readLine();
+			String[] test = line1.split(" ");
+			datacenter dc = new datacenter();
+			
+			
 			//parcours des lines
 			while ((line1=reader.readLine()) != null){
 				
