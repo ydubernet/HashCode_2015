@@ -1,9 +1,9 @@
 package fr.google.hashcode.main;
 
-public class datacenter {
+public class Datacenter {
 	
 
-	public datacenter(int nbRange, int nbEmplacementD, int nbEmplcementI,
+	public Datacenter(int nbRange, int nbEmplacementD, int nbEmplcementI,
 			int nbGroupe, int nbServer) {
 		this.nbRange = nbRange;
 		this.nbEmplacementD = nbEmplacementD;

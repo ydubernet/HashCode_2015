@@ -21,7 +21,7 @@ public class Main {
 			//Ligne1
 			String line = reader.readLine();
 			String[] test = line.split(" ");
-			datacenter dc = new datacenter(Integer.parseInt(test[0]),Integer.parseInt(test[1]),Integer.parseInt(test[2]),
+			Datacenter dc = new Datacenter(Integer.parseInt(test[0]),Integer.parseInt(test[1]),Integer.parseInt(test[2]),
 					Integer.parseInt(test[3]),Integer.parseInt(test[4]));
 			
 			//Parcours des emplacement indispo
@@ -48,6 +48,7 @@ public class Main {
 			
 			
 			System.out.println("end");
+			ComputeFl.Compute(dc);
 			
 			/*while ((line=reader.readLine()) != null){
 				
