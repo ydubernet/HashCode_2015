@@ -3,7 +3,7 @@ package fr.google.hashcode.main;
 public final class ComputeFl {
 
 	public static void Compute(Datacenter dc){
-		int totalemplacement = dc.getNbRange()*dc.getNbEmplacementD()-dc.getNbEmplcementI();
+		/*int totalemplacement = dc.getNbRange()*dc.getNbEmplacementD()-dc.getNbEmplcementI();
 		int currentUsed = 0;
 		int capaciteTotal = 0;
 		boolean next = true;
@@ -14,15 +14,15 @@ public final class ComputeFl {
 			srv.setPlace(true);
 			currentUsed+=srv.getTaille();
 			capaciteTotal+=srv.getCapacite();
-		} while (next==true);
+		} while (next==true);*/
 		
 		
 		int[] rangeFirstIndex = new int[dc.getNbRange()];
 
 		int groupe = 0;
 		boolean test = false;
-		int maxTaille = getMaxTaille(dc.getServeurs());
-		
+		//int maxTaille = getMaxTaille(dc.getServeurs());
+		boolean next ;
 		do{
 			next = false;
 			test = !test;
@@ -64,23 +64,6 @@ public final class ComputeFl {
 			
 		} while (next==true);
 		
-		/*for (int rang = 0 ; rang<dc.getNbRange();rang++){
-			
-			for (int emp=0;emp<dc.getNbEmplacementD();emp++){
-				if (isIndispo(rang,emp,dc.getEmplacementIndispo()))
-					continue;
-				for (int i = 0;i<dc.getNbServer();i++){
-					Serveur serv = dc.getServeurs()[i];
-					if (serv.isPlace())
-						continue;
-					int diff = dc.getNbEmplacementD()-emp+1;
-					if (serv.getTaille()>)
-				}
-				
-			}
-			
-			
-		}*/
 		
 	}
 	
@@ -101,7 +84,7 @@ public final class ComputeFl {
 		Serveur result = srv[0];
 		for (int i = 1 ; i<srv.length;i++){
 			Serveur serveur= srv[i];
-			if (!serveur.isPlace()/*||serveur.getTaille()!=taille*/)
+			if (serveur.isPlace()/*||serveur.getTaille()!=taille*/)
 				continue;
 			if (serveur.getCapacite()>result.getCapacite()||(serveur.getCapacite()==result.getCapacite()&&serveur.getTaille()<result.getTaille()))
 				result=serveur;
