@@ -48,6 +48,9 @@ public class Main {
 			
 			
 			System.out.println("end");
+			
+			int capaciteMinimale = CalculCapacite.calculCapaciteMin(dc);
+			
 			ComputeFl.Compute(dc);
 			
 			/*while ((line=reader.readLine()) != null){
