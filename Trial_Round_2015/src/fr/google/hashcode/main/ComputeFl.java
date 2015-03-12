@@ -7,23 +7,47 @@ public final class ComputeFl {
 		int[] rangeFirstIndex = new int[dc.getNbRange()];
 		boolean next;
 		int groupe = 0;
+		boolean test = false;
 		
 		do{
 			next = false;
-			for (int i = 0 ; i<dc.getNbRange();i++){
-				Serveur srv = maxServeurAplace(dc.getServeurs());
-				for (int col=rangeFirstIndex[i]; col<dc.getNbEmplacementD();col++){
-					if (isPossible(i,col,dc,srv)){
-						srv.range(i, col, groupe);
-						groupe = groupe>=dc.getNbGroupe()-1?0:groupe+1;
-						rangeFirstIndex[i]=col+1+srv.getTaille();
-						next = true;
-						
-						break;
-						
+			test = !test;
+			
+			if (test){
+				for (int i = 0 ; i<dc.getNbRange();i++){
+					Serveur srv = maxServeurAplace(dc.getServeurs());
+					for (int col=rangeFirstIndex[i]; col<dc.getNbEmplacementD();col++){
+						if (isPossible(i,col,dc,srv)){
+							srv.range(i, col, groupe);
+							groupe = groupe>=dc.getNbGroupe()-1?0:groupe+1;
+							rangeFirstIndex[i]=col+1+srv.getTaille();
+							next = true;
+							
+							break;
+							
+						}
 					}
 				}
+				
 			}
+			else {
+				for (int i = 15 ; i>=0;i--){
+					Serveur srv = maxServeurAplace(dc.getServeurs());
+					for (int col=rangeFirstIndex[i]; col<dc.getNbEmplacementD();col++){
+						if (isPossible(i,col,dc,srv)){
+							srv.range(i, col, groupe);
+							groupe = groupe>=dc.getNbGroupe()-1?0:groupe+1;
+							rangeFirstIndex[i]=col+1+srv.getTaille();
+							next = true;
+							break;
+							
+						}
+					}
+				}
+				
+			}
+			
+			
 		} while (next==true);
 		
 		/*for (int rang = 0 ; rang<dc.getNbRange();rang++){
