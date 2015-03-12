@@ -42,7 +42,11 @@ public class Main {
 			//Boucle ecrire serveur
 			for (int i = 0 ; i<dc.getNbServer();i++){
 				Serveur server = dc.getServeurs()[i];
-				String lin = server.getRange()+" "+server.getEmplacement()+" "+server.getGroupe()+(i<dc.getNbServer()-1?endLine:"");
+				String lin;
+				if (!server.isPlace())
+					lin="x"+(i<dc.getNbServer()-1?endLine:"");
+				else
+					lin = server.getRange()+" "+server.getEmplacement()+" "+server.getGroupe()+(i<dc.getNbServer()-1?endLine:"");
 				fos.write(lin.getBytes());
 			}
 			

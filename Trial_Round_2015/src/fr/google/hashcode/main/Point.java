@@ -14,7 +14,7 @@ public class Point {
 		return y;
 	}
 
-	private final int x;
+	final int x;
 	private final int y;
 	
 	/**

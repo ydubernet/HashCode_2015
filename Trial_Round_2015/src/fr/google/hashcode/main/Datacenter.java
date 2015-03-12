@@ -3,10 +3,10 @@ package fr.google.hashcode.main;
 public class Datacenter {
 	
 
-	public Datacenter(int nbRange, int nbEmplacementD, int nbEmplcementI,
+	public Datacenter(int nbRange, int nbEmplacement, int nbEmplcementI,
 			int nbGroupe, int nbServer) {
 		this.nbRange = nbRange;
-		this.nbEmplacementD = nbEmplacementD;
+		this.nbEmplacement = nbEmplacement;
 		this.nbEmplcementI = nbEmplcementI;
 		this.nbGroupe = nbGroupe;
 		this.nbServer = nbServer;
@@ -15,7 +15,7 @@ public class Datacenter {
 	}
 
 	private final int nbRange;
-	private final int nbEmplacementD;
+	private final int nbEmplacement;
 	private final int nbEmplcementI;
 	private final int nbGroupe;
 	private final int nbServer;
@@ -56,7 +56,7 @@ public class Datacenter {
 	 * @return the nbEmplacementD
 	 */
 	public int getNbEmplacementD() {
-		return nbEmplacementD;
+		return nbEmplacement;
 	}
 
 	/**
