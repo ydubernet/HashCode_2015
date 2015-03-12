@@ -8,7 +8,7 @@ public final class ComputeFl {
 		boolean next = true;
 		do{
 			Serveur srv = maxServeurAplace(dc.getServeurs());
-			srv.isPlace()
+			srv.setPlace(p);
 		} while (next==true)
 		for (int i=0;i<dc.getNbServer();i++){
 			

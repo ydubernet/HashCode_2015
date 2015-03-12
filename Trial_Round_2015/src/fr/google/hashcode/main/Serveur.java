@@ -67,6 +67,10 @@ public class Serveur {
 		this.groupe=groupe;
 		place=true;
 	}
+	
+	public void setPlace(boolean p){
+		this.place=p;
+	}
 
 
 
