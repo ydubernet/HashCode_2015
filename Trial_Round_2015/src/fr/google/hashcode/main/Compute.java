@@ -11,13 +11,13 @@ public class Compute {
 	
 	public void populateRanges() {
 		Point[] indispo = dc.getEmplacementIndispo();
-		Range[] ranges = new Range[dc.getNbEmplacementD()];
+		Range[] ranges = new Range[dc.getNbEmplacement()];
 		
-		Emplacement[] emplacements = new Emplacement[dc.getNbEmplacementD()];
+		Emplacement[] emplacements = new Emplacement[dc.getNbEmplacement()];
 		
 		for(int j = 0 ; j<dc.getNbRange();j++)
 		{
-			ranges[j] = new Range(dc.getNbEmplacementD(),j);
+			ranges[j] = new Range(dc.getNbEmplacement(),j);
 			ranges[j].prepare();
 			
 			//Pour chaque range

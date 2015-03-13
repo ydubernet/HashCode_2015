@@ -4,7 +4,8 @@ public class Serveur {
 	private final int taille;
 	private final int capacite;
 	
-	private boolean place = false;
+	private boolean place;
+	private boolean choisi;
 	
 	private int range;
 	private int emplacement;
@@ -67,9 +68,19 @@ public class Serveur {
 		this.groupe=groupe;
 		place=true;
 	}
-	
-	public void setPlace(boolean p){
-		this.place=p;
+
+	/**
+	 * @return the choisi
+	 */
+	public boolean isChoisi() {
+		return choisi;
+	}
+
+	/**
+	 * @param choisi the choisi to set
+	 */
+	public void setChoisi(boolean choisi) {
+		this.choisi = choisi;
 	}
 
 
