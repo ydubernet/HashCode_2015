@@ -31,12 +31,10 @@ public final class ComputeFl {
 			//for (int taille = maxTaille; taille>0;taille--){
 				//if (test){
 			for (int j = 0 ; j<dc.getNbRange();j++){
-				Serveur srv = maxServeurAplaceAfter(dc.getServeurs(),dc.getNbEmplacement());
-				if (srv==null)
-					break;
+				Serveur srv = dc.nextServeurNonPlace(dc.getNbEmplacement());
 				for (int col=rangeFirstIndex[j]; col<dc.getNbEmplacement();col++){
 					if (isPossible(j,col,dc,srv)){
-						srv.range(j, col, groupe);
+						srv.range(j, col, /*dc.getGroupe(j)*/groupe);
 						groupe = groupe>=dc.getNbGroupe()-1?0:groupe+1;
 						rangeFirstIndex[j]=col+srv.getTaille();
 						next = true;
@@ -69,15 +67,20 @@ public final class ComputeFl {
 			
 		} while (next==true);
 		
+		next=true;
 		groupe=0;
-		while (!dc.isFull()){
+		while (next==true){
+			next=false;
 			for (int i = 0 ; i<dc.getNbRange();i++){
 				for (int j=0;j<dc.getNbEmplacement();j++){
-					if (!dc.isUsed(i, j)){
-						int nb = dc.getNBEmplacementAfter(i, j)+1;
-						Serveur srv = maxServeurAplaceAfter(dc.getServeurs(), nb);
-						srv.range(i, j, groupe);
+					if (!dc.isUsed(i,j)&!dc.isIndispo(i, j)){
+						int nb = dc.getNBEmplacementDispo(i,j);
+						Serveur srv = dc.nextServeurNonPlace(nb);
+						if (srv==null)
+							continue;
+						srv.range(i, j, /*dc.getGroupe(i)*/groupe);
 						groupe = groupe>=dc.getNbGroupe()-1?0:groupe+1;
+						next=true;
 						break;
 					}
 				}
@@ -88,63 +91,10 @@ public final class ComputeFl {
 	}
 	
 	private static boolean isPossible(int x, int y, Datacenter dc,Serveur srv){
-		if (dc.getNbEmplacement()-y<srv.getTaille())
+		int nbDispo = dc.getNBEmplacementDispo(x, y);
+		if (nbDispo<srv.getTaille())
 			return false;
-		
-		for (int i = y ;i<y+srv.getTaille();i++){
-			for (int z = 0 ; z<dc.getNbEmplcementI();z++){
-			if (dc.getEmplacementIndispo()[z].getX()==x&&dc.getEmplacementIndispo()[z].getY()==i)
-				return false;
-			}
-		}
 		return true;
-	}
-	
-	private static Serveur maxServeurAplaceAfter(Serveur[] srv, int taille){
-		Serveur result = null;
-		int deb = 0;
-		while (deb<srv.length){
-			if (!srv[deb].isPlace()&&srv[deb].getTaille()<=taille){
-				result = srv[deb];
-				break;
-			}
-			deb++;
-		}
-		
-		for (int i = deb ; i<srv.length;i++){
-			Serveur serveur= srv[i];
-			if (serveur.isPlace()||serveur.getTaille()>taille)
-				continue;
-			if (serveur.getCapacite()>result.getCapacite()||(serveur.getCapacite()==result.getCapacite()&&serveur.getTaille()<result.getTaille()))
-				result=serveur;
-		}
-			
-		return result;
-	}
-	
-	
-	private static Serveur maxServeurAplace(Serveur[] srv, int diff){
-		Serveur result = null;
-		int deb = 0;
-		while (deb<srv.length){
-			if (!srv[deb].isPlace()&&srv[deb].getTaille()<=diff){
-				result = srv[deb];
-				break;
-			}
-			deb++;
-		}
-		if (result==null)
-			return null;
-		deb++;
-		for (int i = deb ; i<srv.length;i++){
-			Serveur serveur= srv[i];
-			if (serveur.isPlace()||srv[deb].getTaille()>diff)
-				continue;
-			if (serveur.getCapacite()>result.getCapacite()||(serveur.getCapacite()==result.getCapacite()&&serveur.getTaille()<result.getTaille()))
-				result=serveur;
-		}
-			
-		return result;
 	}
 	
 

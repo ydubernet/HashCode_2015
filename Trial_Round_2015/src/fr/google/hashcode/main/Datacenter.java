@@ -83,7 +83,10 @@ public class Datacenter {
 	
 	public boolean isUsed(int x, int y){
 		for (int z = 0 ; z<nbServer;z++){
-			if (serveurs[z].getRange()==x&&(serveurs[z].getEmplacement()<=y&&serveurs[z].getEmplacement()+serveurs[z].getTaille()>=y))
+			if (!serveurs[z].isPlace())
+				continue;
+			int fin = serveurs[z].getEmplacement()+serveurs[z].getTaille()-1;
+			if (serveurs[z].getRange()==x&&(serveurs[z].getEmplacement()<=y&&fin>=y))
 				return true;
 		}
 		return false;
@@ -101,14 +104,68 @@ public class Datacenter {
 		return true;
 	}
 	
-	public int getNBEmplacementAfter(int x, int y){
+	public int getNBEmplacementDispo(int x, int y){
 		int result = 0;
-		y++;
-		while (y<nbEmplacement&&!isUsed(x, y)&&!isIndispo(x, y)){
+		while (y<nbEmplacement&&!isUsed(x,y)&&!isIndispo(x,y)){
 			result++;
 			y++;
 		}
 			return result;
 	}
+	
+	public Serveur nextServeurNonPlace(int taille){
+		Serveur result = null;
+		int deb = 0;
+		while (deb<nbServer){
+			if (!serveurs[deb].isPlace()&&serveurs[deb].getTaille()<=taille){
+				result = serveurs[deb];
+				break;
+			}
+			deb++;
+		}
+		
+		for (int i = deb ; i<nbServer;i++){
+			Serveur serveur = serveurs[i];
+			if (serveur.isPlace()||serveur.getTaille()>taille)
+				continue;
+			if (serveur.getCapacite()>result.getCapacite()||(serveur.getCapacite()==result.getCapacite()&&serveur.getTaille()<result.getTaille()))
+			//if ((serveur.getCapacite()/serveur.getTaille())>(result.getCapacite()/result.getTaille()))
+				result=serveur;
+		}
+			
+		return result;
+	}
+	
+	public int getGroupe(int range){
+		int[] groupes = new int[nbGroupe];
+		for (int i = 0 ; i<nbServer;i++){
+			Serveur serveur = serveurs[i];
+			if (!serveur.isPlace()||serveur.getRange()!=range)
+				continue;
+			
+			groupes[serveur.getGroupe()]+=serveur.getCapacite();
+			
+		}
+		
+		int groupeMin = 0;
+		int min = 0;
+		int pas = range*nbGroupe;
+		int debut = nbGroupe-1+pas;
+		int fin = pas;
+		for (int i = debut ; i>=fin;i--){
+			int indice = i%(nbGroupe);
+			if (min>=groupes[indice]){
+				groupeMin=indice;
+				min = groupes[indice];
+			}
+		}
+		
+		return groupeMin;
+	}
+	
+	public void affecterGroupe(){
+		
+	}
+	
 
 }
