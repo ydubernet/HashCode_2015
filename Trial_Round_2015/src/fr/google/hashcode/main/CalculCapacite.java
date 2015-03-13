@@ -65,6 +65,14 @@ public class CalculCapacite {
 			}	
 		}
 		
+		
+		int result[] = new int[dc.getNbRange()];
+		for(int k = 0;k<dc.getNbRange();k++)
+		{
+			result[k] = groupe[k] - bestGroupeRange[k];
+		}
+		for (int i =  0 groupe[i] //- bestGroupeRange[h];
+		
 		return 0;
 		
 	}
